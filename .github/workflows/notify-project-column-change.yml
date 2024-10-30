@@ -26,7 +26,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
         run: |
-          query='{ user(login: \"Pyxis-Belgique\") { projectNext(number: 2) { items(first: 100) { nodes { id title content { __typename ... on Issue { state } ... on PullRequest { state } } fieldValues(first: 10) { nodes { projectField { name } value } } } } } } }'
+          query='{ organization(login: \"Pyxis-Belgique\") { projectNext(number: 2) { items(first: 100) { nodes { id title content { __typename ... on Issue { state } ... on PullRequest { state } } fieldValues(first: 10) { nodes { projectField { name } value } } } } } } }'
           response=$(curl -s -X POST -H "Authorization: bearer $GITHUB_TOKEN" -H "Content-Type: application/json" \
           -d "{\"query\": \"$query\"}" https://api.github.com/graphql)
           echo "$response" > current_state.json

@@ -1,5 +1,5 @@
 {
-  "message": "Bad credentials",
+  "message": "Problems parsing JSON",
   "documentation_url": "https://docs.github.com/graphql",
-  "status": "401"
+  "status": "400"
 }

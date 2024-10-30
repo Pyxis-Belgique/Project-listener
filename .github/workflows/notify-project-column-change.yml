@@ -1,0 +1,74 @@
+name: Monitor Project Column Changes
+
+on:
+  schedule:
+    - cron: '*/2 * * * *'
+
+jobs:
+  monitor-columns:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v3
+
+      - name: Fetch previous state
+        id: load_previous_state
+        run: |
+          if [ -f project_state.json ]; then
+            cat project_state.json
+          else
+            echo '{}' > project_state.json
+          fi
+
+      - name: Fetch project items via GraphQL
+        id: fetch_current_state
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          query='
+          {
+            organization(login: "YOUR_ORG") {
+              projectNext(number: YOUR_PROJECT_NUMBER) {
+                items(first: 100) {
+                  nodes {
+                    id
+                    title
+                    content { __typename ... on Issue { state } ... on PullRequest { state } }
+                    fieldValues(first: 10) {
+                      nodes {
+                        projectField { name }
+                        value
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }'
+          response=$(curl -s -X POST -H "Authorization: bearer $GITHUB_TOKEN" -H "Content-Type: application/json" \
+          -d "{\"query\": \"$query\"}" https://api.github.com/graphql)
+          echo "$response" > current_state.json
+
+      - name: Compare project state and detect changes
+        id: detect_changes
+        run: |
+          previous_state=$(cat project_state.json)
+          current_state=$(cat current_state.json)
+
+          if [ "$previous_state" != "$current_state" ]; then
+            echo "Changes detected"
+            echo "changed=true" >> $GITHUB_ENV
+          else
+            echo "No changes detected"
+            echo "changed=false" >> $GITHUB_ENV
+          fi
+
+      - name: Save current state
+        if: env.changed == 'true'
+        run: |
+          cp current_state.json project_state.json
+          git config --local user.email "cdelecluse@pyxis-tech.com"
+          git config --local user.name "Chris Github action"
+          git add project_state.json
+          git commit -m "Update project state [skip ci]"
+          git push

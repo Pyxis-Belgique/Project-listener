@@ -2,7 +2,7 @@ name: Monitor Project Column Changes
 
 on:
   schedule:
-    - cron: '*/2 * * * *'
+    - cron: '*/5 * * * *'
 
 jobs:
   monitor-columns:
@@ -27,8 +27,8 @@ jobs:
         run: |
           query='
           {
-            organization(login: "YOUR_ORG") {
-              projectNext(number: YOUR_PROJECT_NUMBER) {
+            organization(login: "Pyxis-Belgique") {
+              projectNext(number: 2) {
                 items(first: 100) {
                   nodes {
                     id

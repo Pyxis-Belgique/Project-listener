@@ -28,7 +28,7 @@ jobs:
         run: |
           query='
           {
-            organization(login: "Pyxis-Belgique") {
+            user(login: "Pyxis-Belgique") {
               projectNext(number: 2) {
                 items(first: 100) {
                   nodes {

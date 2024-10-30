@@ -24,7 +24,7 @@ jobs:
       - name: Fetch project items via GraphQL
         id: fetch_current_state
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUBKEY }}
+          GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
         run: |
           query='
           {

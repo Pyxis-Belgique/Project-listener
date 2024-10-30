@@ -1,1 +1,1 @@
-{"errors":[{"path":["query","user","projectNext"],"extensions":{"code":"undefinedField","typeName":"User","fieldName":"projectNext"},"locations":[{"line":1,"column":35}],"message":"Field 'projectNext' doesn't exist on type 'User'"}]}
+{"errors":[{"path":["query","organization","projectNext"],"extensions":{"code":"undefinedField","typeName":"Organization","fieldName":"projectNext"},"locations":[{"line":1,"column":43}],"message":"Field 'projectNext' doesn't exist on type 'Organization'"}]}

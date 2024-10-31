@@ -1,5 +1,5 @@
 {
-    node(id: "PROJECT_ID") {
+    node(id: "PARAMETER") {
         ... on ProjectV2 {
             items(first: 10) {
                 nodes {

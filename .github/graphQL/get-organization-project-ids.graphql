@@ -1,5 +1,5 @@
 {
-    organization(login: "PROJECT_ID") {
+    organization(login: "PARAMETER") {
         projectsV2(first: 10) {
             nodes {
                 id

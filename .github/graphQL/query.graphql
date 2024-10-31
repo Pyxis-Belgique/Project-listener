@@ -1,38 +1,37 @@
 {
-  node(id: "PROJECT_ID") {
-    ... on ProjectV2 {
-      items(first: 100) {
-        nodes {
-          id
-          content {
-            __typename
-            ... on Issue {
-              title
-              state
+    node(id: "PROJECT_ID") {
+        ... on ProjectV2 {
+            items(first: 10) {
+                nodes {
+                    id
+                    content {
+                        __typename
+                        ... on Issue {
+                            id
+                            title
+                            number
+                        }
+                        ... on PullRequest {
+                            id
+                            title
+                            number
+                        }
+                    }
+                    fieldValues(first: 10) {
+                        nodes {
+                            ... on ProjectV2ItemFieldSingleSelectValue {
+                                field {
+                                    ... on ProjectV2FieldCommon {
+                                        name
+                                    }
+                                }
+                                optionId
+                                name
+                            }
+                        }
+                    }
+                }
             }
-            ... on PullRequest {
-              title
-              state
-            }
-          }
-          fieldValues(first: 10) {
-            nodes {
-              ... on ProjectV2ItemFieldTextValue {
-                text
-                field { name }
-              }
-              ... on ProjectV2ItemFieldDateValue {
-                date
-                field { name }
-              }
-              ... on ProjectV2ItemFieldSingleSelectValue {
-                name
-                field { name }
-              }
-            }
-          }
         }
-      }
     }
-  }
 }

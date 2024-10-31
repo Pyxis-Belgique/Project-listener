@@ -36,7 +36,7 @@ jobs:
         id: detect_changes
         run: |
           chmod +x .github/scripts/compare-state.sh
-          ./github/scripts/compare-state.sh
+          .github/scripts/compare-state.sh
 
       - name: Save current state
         if: env.changed == 'true'

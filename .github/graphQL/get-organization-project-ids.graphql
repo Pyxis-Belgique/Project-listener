@@ -1,0 +1,10 @@
+{
+    organization(login: "PROJECT_ID") {
+        projectsV2(first: 10) {
+            nodes {
+                id
+                title
+            }
+        }
+    }
+}

@@ -26,7 +26,6 @@ jobs:
           chmod +x .github/scripts/stringify.sh
           query=$(cat .github/graphQL/query.graphql | .github/scripts/stringify.sh)
           query="${query//PROJECT_ID/PVT_kwHOCnxPXs4ArUQB}"
-          echo "$query"
           response=$(curl -s -X POST -H "Authorization: bearer $GITHUB_TOKEN" -H "Content-Type: application/json" \
           -d "{\"query\": \"$query\"}" https://api.github.com/graphql)
           echo "$response" > current_state.json

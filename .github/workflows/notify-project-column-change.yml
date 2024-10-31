@@ -26,7 +26,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
         run: |
-          chmod +x scripts/stringify.sh
+          chmod +x .github/scripts/stringify.sh
           query=$(cat .github/graphQL/query.graphql | .github/scripts/stringify.sh)
           query="${query//PROJECT_ID/PVT_kwHOCnxPXs4ArUQB}"
           echo "$query"

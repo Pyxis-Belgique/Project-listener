@@ -24,8 +24,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
         run: |
           chmod +x .github/scripts/stringify.sh
-          query=$(cat .github/graphQL/query.graphql | .github/scripts/stringify.sh)
-          query="${query//PROJECT_ID/PVT_kwDOCyNzbs4ArXwD}"
+          query=$(cat .github/graphQL/get-card-detail.graphql | .github/scripts/stringify.sh)
+          query="${query//PROJECT_ID/PVTI_lADOCyNzbs4ArXwDzgUZUBE}"
           response=$(curl -s -X POST -H "Authorization: bearer $GITHUB_TOKEN" -H "Content-Type: application/json" \
           -d "{\"query\": \"$query\"}" https://api.github.com/graphql)
           echo "$response" > current_state.json

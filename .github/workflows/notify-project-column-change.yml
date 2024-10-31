@@ -15,6 +15,7 @@ jobs:
       - name: Fetch previous state
         id: load_previous_state
         run: |
+          chmod +x .github/scripts/check-or-create-state.sh
           .github/scripts/check-or-create-state.sh
 
       - name: Fetch project items via GraphQL
@@ -34,6 +35,7 @@ jobs:
       - name: Compare project state and detect changes
         id: detect_changes
         run: |
+          chmod +x .github/scripts/compare-state.sh
           ./github/scripts/compare-state.sh
 
       - name: Save current state

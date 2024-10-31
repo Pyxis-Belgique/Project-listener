@@ -15,11 +15,7 @@ jobs:
       - name: Fetch previous state
         id: load_previous_state
         run: |
-          if [ -f project_state.json ]; then
-            cat project_state.json
-          else
-            echo '{}' > project_state.json
-          fi
+          .github/scripts/check-or-create-state.sh
 
       - name: Fetch project items via GraphQL
         id: fetch_current_state
@@ -34,26 +30,14 @@ jobs:
           -d "{\"query\": \"$query\"}" https://api.github.com/graphql)
           echo "$response" > current_state.json
         shell: /usr/bin/bash -e {0}
+        
       - name: Compare project state and detect changes
         id: detect_changes
         run: |
-          previous_state=$(cat project_state.json)
-          current_state=$(cat current_state.json)
-
-          if [ "$previous_state" != "$current_state" ]; then
-            echo "Changes detected"
-            echo "changed=true" >> $GITHUB_ENV
-          else
-            echo "No changes detected"
-            echo "changed=false" >> $GITHUB_ENV
-          fi
+          ./github/scripts/compare-state.sh
 
       - name: Save current state
         if: env.changed == 'true'
         run: |
-          cp current_state.json project_state.json
-          git config --local user.email "cdelecluse@pyxis-tech.com"
-          git config --local user.name "Chris Github action"
-          git add project_state.json
-          git commit -m "Update project state [skip ci]"
-          git push
+          chmod +x .github/scripts/copy-and-push.sh
+          .github/scripts/copy-and-push.sh

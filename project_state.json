@@ -1,5 +1,1 @@
-{
-  "message": "Problems parsing JSON",
-  "documentation_url": "https://docs.github.com/graphql",
-  "status": "400"
-}
+{"errors":[{"path":["query","node","... on ProjectV2","items","nodes","fieldValues","nodes","... on ProjectV2ItemFieldTextValue","field","name"],"extensions":{"code":"selectionMismatch","nodeName":"ProjectV2FieldConfiguration"},"locations":[{"line":1,"column":250}],"message":"Selections can't be made directly on unions (see selections on ProjectV2FieldConfiguration)"},{"path":["query","node","... on ProjectV2","items","nodes","fieldValues","nodes","... on ProjectV2ItemFieldDateValue","field","name"],"extensions":{"code":"selectionMismatch","nodeName":"ProjectV2FieldConfiguration"},"locations":[{"line":1,"column":309}],"message":"Selections can't be made directly on unions (see selections on ProjectV2FieldConfiguration)"},{"path":["query","node","... on ProjectV2","items","nodes","fieldValues","nodes","... on ProjectV2ItemFieldSingleSelectValue","field","name"],"extensions":{"code":"selectionMismatch","nodeName":"ProjectV2FieldConfiguration"},"locations":[{"line":1,"column":376}],"message":"Selections can't be made directly on unions (see selections on ProjectV2FieldConfiguration)"}]}

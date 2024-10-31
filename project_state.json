@@ -1,1 +1,5 @@
-{"errors":[{"path":["query","organization","projectNext"],"extensions":{"code":"undefinedField","typeName":"Organization","fieldName":"projectNext"},"locations":[{"line":1,"column":43}],"message":"Field 'projectNext' doesn't exist on type 'Organization'"}]}
+{
+  "message": "Problems parsing JSON",
+  "documentation_url": "https://docs.github.com/graphql",
+  "status": "400"
+}

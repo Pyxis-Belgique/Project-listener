@@ -1,0 +1,38 @@
+{
+  node(id: "PROJECT_ID") {
+    ... on ProjectV2 {
+      items(first: 100) {
+        nodes {
+          id
+          content {
+            __typename
+            ... on Issue {
+              title
+              state
+            }
+            ... on PullRequest {
+              title
+              state
+            }
+          }
+          fieldValues(first: 10) {
+            nodes {
+              ... on ProjectV2ItemFieldTextValue {
+                text
+                field { name }
+              }
+              ... on ProjectV2ItemFieldDateValue {
+                date
+                field { name }
+              }
+              ... on ProjectV2ItemFieldSingleSelectValue {
+                name
+                field { name }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

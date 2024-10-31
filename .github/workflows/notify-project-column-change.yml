@@ -26,7 +26,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
         run: |
-          query='{ node(id: \"PVT_kwHOCnxPXs4ArUQB\") { ... on ProjectV2 { items(first: 100) { nodes { id title content { __typename ... on Issue { state } ... on PullRequest { state } } fieldValues(first: 10) { nodes { ... on ProjectV2ItemFieldTextValue { text field { name } } ... on ProjectV2ItemFieldDateValue { date field { name } } ... on ProjectV2ItemFieldSingleSelectValue { name field { name } } } } } } } } }'
+          query=$(cat .github/requests/get-column-item-query.graphql)
+          query="${query//PROJECT_ID/PVT_kwHOCnxPXs4ArUQB}"
           response=$(curl -s -X POST -H "Authorization: bearer $GITHUB_TOKEN" -H "Content-Type: application/json" \
           -d "{\"query\": \"$query\"}" https://api.github.com/graphql)
           echo "$response" > current_state.json

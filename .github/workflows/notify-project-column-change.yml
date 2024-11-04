@@ -12,6 +12,12 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v3
 
+      - name: Run Pyxis - Project State Tracker
+        uses: Pyxis-Belgique/Pyxis-project-state-tracking@main
+        with:
+          organization-token: "fake token!"
+          api-url: 'https://example.com/api/endpoint'
+
       - name: Fetch previous state
         id: load_previous_state
         run: |

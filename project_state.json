@@ -1,1 +1,1 @@
-{"data":{"node":{"id":"PVTI_lADOCyNzbs4ArXwDzgUZUCk","content":{"__typename":"DraftIssue","title":"Test 5","body":""},"fieldValues":{"nodes":[{"text":"Test 5","field":{"name":"Title"}},{"name":"Todo","field":{"name":"Status"}}]}}}}
+{"data":{"node":{"id":"PVTI_lADOCyNzbs4ArXwDzgUZUCk","content":{"__typename":"DraftIssue","title":"Test 5","body":""},"fieldValues":{"nodes":[{"text":"Test 5","field":{"name":"Title"}},{"name":"In Progress","field":{"name":"Status"}}]}}}}

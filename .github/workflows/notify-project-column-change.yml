@@ -15,8 +15,9 @@ jobs:
       - name: Run Pyxis - Project State Tracker
         uses: Pyxis-Belgique/Pyxis-project-state-tracking@main
         with:
-          organization-token: "fake token!"
+          organization-token: ${{ secrets.PAT_TOKEN }}
           api-url: 'https://example.com/api/endpoint'
+          api-token: "test-token"
 
       - name: Fetch previous state
         id: load_previous_state
@@ -36,7 +37,7 @@ jobs:
           -d "{\"query\": \"$query\"}" https://api.github.com/graphql)
           echo "$response" > current_state.json
         shell: /usr/bin/bash -e {0}
-        
+
       - name: Compare project state and detect changes
         id: detect_changes
         run: |
